@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+    <meta name="csrf-token" content="cWktueAaQtyttHwkX0gtgTalzoraAdMiY3mqmiQi">
+
+    <title>HAR.com</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="cWktueAaQtyttHwkX0gtgTalzoraAdMiY3mqmiQi">
+    <link rel="shortcut icon" sizes="32x32" href="https://www-v2.har.com/images/favicon_32.png">
+    <link rel="shortcut icon" sizes="48x48" href="https://www-v2.har.com/images/favicon_48.png">
+    <link rel="shortcut icon" sizes="64x64" href="https://www-v2.har.com/images/favicon_64.png">
+    <link rel="shortcut icon" sizes="16x16" href="https://www-v2.har.com/favicon.ico">
+    <link rel="apple-touch-icon" sizes="20x20" href="https://www-v2.har.com/images/favicon_20.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="https://www-v2.har.com/images/favicon_57.png">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://www-v2.har.com/images/favicon_57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://www-v2.har.com/images/favicon_72.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="https://www-v2.har.com/images/favicon_96.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://www-v2.har.com/images/favicon_114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://www-v2.har.com/images/favicon_120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://www-v2.har.com/images/favicon_144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://www-v2.har.com/images/favicon_152.png">
+    <meta name="msapplication-TileColor" content="#0b50d2">
+    <meta name="msapplication-TileImage" content="https://www-v2.har.com/images/favicon_windows_144.png">
+
+    <link href="https://www-v2.har.com/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://www-v2.har.com/css/base.css?v=01000052" rel="stylesheet" />
+    <link href="https://www-v2.har.com/css/layout.css?v=01000052" rel="stylesheet" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" type="text/css" rel="stylesheet">
+    <link href="https://www-v2.har.com/maps/mapbox/style.css" type="text/css" rel="stylesheet">
+    <!-- // dropdown menu select -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
+</head>
+
+<body id="" class="">
+    <nav class="navbar navbar-expand-md har-nav">
+
+        <div class="container container--v2">
+
+            <a class="navbar-brand" href="/"><img alt="HAR"
+                    src="https://content.harstatic.com/resources/images/common/logo-blue.svg"></a>
+        </div>
+    </nav>
+    <div class="PageContent">
+
+        <style type="text/css">
+            .PageContent {
+                padding: 30px
+            }
+
+            .dropdown-container {
+                margin-bottom: 3rem;
+                width: 39%;
+                display: flex;
+                justify-content: space-around;
+            }
+
+            .btn-lg {
+                padding: 0.5rem 1rem;
+                font-size: 1.25rem;
+                line-height: 1.5;
+                border-radius: 0.3rem;
+            }
+
+            .button {
+                color: black;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 10px;
+                border-radius: 50%;
+                height: 50px;
+                width: 50px;
+                border: none;
+            }
+
+            .categoriesContainer {
+                background: #0738cd12;
+            }
+
+            .cList {
+                height: 155px;
+                min-height: 210px;
+                background: white;
+                overflow-y: scroll;
+                z-index: 9999;
+            }
+
+            .cList>li {
+                padding: 5px;
+                border: 1px solid lightgray;
+                cursor: pointer;
+            }
+
+            .input {
+                padding: 0.5rem 1rem;
+            }
+
+            .appendInput {
+                margin-bottom: 10px;
+            }
+
+            #cCWraper {
+                border: 1px solid;
+                margin-bottom: 1rem;
+                min-width: 15rem;
+                display: block;
+                text-align: center;
+                cursor: pointer;
+            }
+
+            .button5 {
+                margin-top: -10px;
+            }
+
+            .catLists {
+                display: block;
+                position: absolute;
+                z-index: 999999999999;
+            }
+
+            #marker {
+                cursor: pointer;
+            }
+
+            .mapboxgl-marker {
+                cursor: pointer;
+            }
+
+            .mapboxgl-popup-content {
+                min-width: 200px
+            }
+        </style>
+        <h1>Mapbox Places</h1>
+        <div class="dropdown-container">
+            <div id="categoriesContainer">
+                <div id="cCWraper">
+                    <button id="ddContainer" type="button" class="btn  btn-lg">Category</button>
+                </div>
+                <div class="catLists" id="categoriesList">
+                    <!-- <ul class="cList" id="categoriesList"></ul> -->
+                </div>
+            </div>
+
+            <div>
+                <input type="text" class="input" id="selectedCat" placeholder="select a category" disabled>
+
+            </div>
+            <div>
+                <button id="searchCategory" class="button button5">Search</button>
+            </div>
+
+        </div>
+        <div id="myMap" style="width:500px; height:500px; border:1px solid black"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://www-v2.har.com/js/bootstrap.bundle.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <!-- dropdown menu select -->
+    <script type="text/javascript">
+
+        var currentMarker = [] // empty array to store marker
+        var marker;
+        $('#cCWraper').on('click', function (e) {
+            e.stopPropagation();
+            $('.catLists').show(); // show categories
+            div = document.getElementById("categoriesList");
+            a = div.getElementsByTagName("li");
+            for (i = 0; i < a.length; i++) {
+                a[i].style.display = 'block'
+            }
+        })
+        function setCatListMap() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("search");
+            filter = input.value.toUpperCase();
+            div = document.getElementById("categoriesList");
+            a = div.getElementsByTagName("li");
+            // a = d.map((i)=> i.innerHTML)
+            for (i = 0; i < a.length; i++) {
+                txtValue = a[i].textContent || a[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    a[i].style.display = "";
+                } else {
+                    a[i].style.display = "none";
+                }
+            }
+        }
+        $('#ddContainer').one('click', function (e) {
+            e.stopPropagation();
+            const x = document.createElement('input'); //custom input in category list
+            x.setAttribute('type', 'text'); // set input type text
+            x.setAttribute('id', 'search'); // set input id search
+            x.setAttribute('autocomplete', 'off');
+            x.setAttribute('onkeypress', 'return AddKeyPress(event)');
+            x.setAttribute('class', 'appendInput'); // set input classname appendInput
+            x.setAttribute('onkeyup', 'setCatListMap()');
+            document.getElementById('categoriesList').appendChild(x); // set input as a first child to categories list
+            const ul = document.createElement('ul'); // create a custom un-order list
+            ul.setAttribute('class', 'cList') // set ul classname
+            ul.setAttribute('id', 'getCategory')
+            document.getElementById('categoriesList').appendChild(ul); // set ul as a child of categories list
+            // if (ul.innerHTML === '' && ul.length !==0)
+            categories.map((c) => { // get each category from category array
+                const li = document.createElement('li'); // create a custom list item
+                li.setAttribute('class', 'catItem') // set classname catItem to li
+                ul.appendChild(li); // make li as a child to ul
+                li.innerHTML = c; // assign value to li 
+            })
+            $('input').on('keyup', function (e) {
+                const search = encodeURI(this.value);
+                document.getElementById('selectedCat').value = decodeURIComponent(e.target.value);
+
+            })
+        })
+        function AddKeyPress(e) {
+            // look for window.event in case event isn't passed in
+            e = e || window.event;
+            if (e.keyCode == 13) {
+                $(".catLists").hide();
+                const value = encodeURIComponent(document.getElementById('selectedCat').value);
+                const LanLat = map.getBounds().toArray(); // get longitude & latitude (boundries) from map
+                const dbox = encodeURIComponent(LanLat[0].join(',') + ',' + LanLat[1].join(',')) // convert into sting
+                $.ajax('https://api.mapbox.com/geocoding/v5/mapbox.places/' + value + '.json?type=poi&bbox=' + dbox + '&access_token=pk.eyJ1IjoiaGFyZGV2ZXJpY2siLCJhIjoiY2lyZmNta20wMDA4dWc5bmV1cWduOWxvNSJ9.eJRT3Wys7QU3GvqRmUMYsw', {
+                    success: function (response) { // http request returns success
+                        response.features.map((x) => {
+                            const text = x.text; // get popup text message for each marker
+                            var center = x.center; // get position of marker
+                            const popup = new mapboxgl.Popup().setText(text) // create a popup shows text
+                            marker = new mapboxgl.Marker().setLngLat(center).setPopup(popup).addTo(map); // create a marker with popup message
+                            currentMarker.push(marker); // store previous marker
+                            $(document).on('click', '.catItem', function (e) {
+                                if (currentMarker !== null) {
+                                    for (let i = currentMarker.length - 1; i >= 0; i--) {
+                                        currentMarker[i].remove() // remove previous marker to add new one
+                                    }
+                                }
+                            })
+                            $(document).on('click', '.appendInput', function (e) {
+                                if (currentMarker !== null) {
+                                    for (let i = currentMarker.length - 1; i >= 0; i--) {
+                                        currentMarker[i].remove() // remove previous marker to add custom marker
+                                    }
+                                }
+
+                            })
+                        })
+
+
+                    }
+
+                })
+            }
+
+        }
+        $(document).click(function (e) { // hide categories to click on body except categories button
+            document.getElementById('search').value = ''
+            if (!$(e.target).hasClass("btn" && "appendInput") // check if event generated , not on the categories search button
+                && !$(e.target).parents(".catLists").length !== 0) { // either event belongs to parent ?
+                $(".catLists").hide(); // hide categories
+            }
+        })
+        mapboxgl.accessToken = 'pk.eyJ1IjoiaGFyZGV2ZXJpY2siLCJhIjoiY2lyZmNta20wMDA4dWc5bmV1cWduOWxvNSJ9.eJRT3Wys7QU3GvqRmUMYsw';
+        const map = new mapboxgl.Map({
+            container: 'myMap', // Container ID
+            style: 'mapbox://styles/mapbox/streets-v11', // Map style to use
+            center: [-95.36201477050782, 29.74887863492847], // Starting position [lng, lat]
+            zoom: 12, // Starting zoom level,
+        });
+        $(document).on('click', '.catItem', function (e) {
+            const value = encodeURIComponent(e.currentTarget.innerHTML); // user selectede value
+            document.getElementById('selectedCat').value = decodeURIComponent(value);
+        })
+        $(document).on('click', '#searchCategory', function () {
+            const value = encodeURIComponent(document.getElementById('selectedCat').value);
+            const LanLat = map.getBounds().toArray(); // get longitude & latitude (boundries) from map
+            const dbox = encodeURIComponent(LanLat[0].join(',') + ',' + LanLat[1].join(',')) // convert into sting
+            $.ajax('https://api.mapbox.com/geocoding/v5/mapbox.places/' + value + '.json?type=poi&bbox=' + dbox + '&access_token=pk.eyJ1IjoiaGFyZGV2ZXJpY2siLCJhIjoiY2lyZmNta20wMDA4dWc5bmV1cWduOWxvNSJ9.eJRT3Wys7QU3GvqRmUMYsw', {
+                success: function (response) { // http request returns success
+                    response.features.map((x) => {
+                        const text = x.text; // get popup text message for each marker
+                        var center = x.center; // get position of marker
+                        const popup = new mapboxgl.Popup().setText(text) // create a popup shows text
+                        marker = new mapboxgl.Marker().setLngLat(center).setPopup(popup).addTo(map); // create a marker with popup message
+                        currentMarker.push(marker); // store previous marker
+                        $(document).on('click', '.catItem', function (e) {
+                            if (currentMarker !== null) {
+                                for (let i = currentMarker.length - 1; i >= 0; i--) {
+                                    currentMarker[i].remove() // remove previous marker to add new one
+                                }
+                            }
+                        })
+                        $(document).on('click', '.appendInput', function (e) {
+                            if (currentMarker !== null) {
+                                for (let i = currentMarker.length - 1; i >= 0; i--) {
+                                    currentMarker[i].remove() // remove previous marker to add custom marker
+                                }
+                            }
+
+                        })
+                    })
+
+
+                }
+
+            })
+        })
+        const categories = [ // get all possible categories
+            "accessories",
+            "advertising",
+            "airport",
+            "alcohol",
+            "alcohol services",
+            "amusement park",
+            "apparel",
+            "aquarium",
+            "art",
+            "assisted",
+            "assisted living",
+            "assisted living service",
+            "athletic field",
+            "bagel",
+            "bar",
+            "barber",
+            "base",
+            "beach",
+            "beauty",
+            "beer",
+            "bicycle",
+            "big box store",
+            "bike",
+            "boating",
+            "book shop",
+            "bookstore",
+            "booze",
+            "bowl",
+            "bowling",
+            "bowling alley",
+            "boxing",
+            "brewery",
+            "bus",
+            "bus station",
+            "bus stop",
+            "butcher",
+            "campground",
+            "candies",
+            "candy",
+            "candy store",
+            "car detail",
+            "car maintenance",
+            "car rental",
+            "car repair",
+            "car wash",
+            "car wax",
+            "casinos",
+            "cat",
+            "cemetery",
+            "child care",
+            "chocolate",
+            "chocolatier",
+            "cinema",
+            "cleaning",
+            "clinic",
+            "clothing",
+            "college",
+            "combat sports",
+            "computer",
+            "concert",
+            "concert hall",
+            "confectionary",
+            "contractor",
+            "cycle",
+            "dance",
+            "day care",
+            "daycare",
+            "decor",
+            "deli",
+            "department",
+            "department store",
+            "detail",
+            "disco",
+            "dog",
+            "dog park",
+            "donut",
+            "drug services",
+            "dry cleaner",
+            "dry cleaning",
+            "education",
+            "electricity",
+            "electronic",
+            "embassy",
+            "emergency room",
+            "er",
+            "fast food",
+            "ferry",
+            "fighting",
+            "fire department",
+            "fire house",
+            "fire stations",
+            "florist",
+            "flower shop",
+            "flowers",
+            "foreign",
+            "forest",
+            "frame",
+            "framing",
+            "fuel",
+            "funeral home",
+            "funeral service",
+            "furniture",
+            "gaming",
+            "garden",
+            "garden center",
+            "gas",
+            "gas station",
+            "gift",
+            "glasses",
+            "government agency",
+            "graveyard",
+            "groceries",
+            "grocery",
+            "gun range",
+            "hair",
+            "handyman",
+            "home",
+            "home goods",
+            "home improvement",
+            "hospital",
+            "hotel",
+            "ice cream",
+            "ice cream parlor",
+            "information",
+            "insurance",
+            "jewelry",
+            "juice",
+            "juice bar",
+            "lake",
+            "landmark",
+            "laundromat",
+            "laundry",
+            "laundry service",
+            "law",
+            "law enforcement",
+            "law office",
+            "lawyer",
+            "legal",
+            "lodging",
+            "magazine",
+            "mail",
+            "mall",
+            "market",
+            "marketing",
+            "martial arts",
+            "massage",
+            "masseuse",
+            "mausoleum",
+            "meat",
+            "medical center",
+            "military",
+            "miniature golf",
+            "minigolf",
+            "motel",
+            "mountain",
+            "movie theater",
+            "museum",
+            "music",
+            "natural gas",
+            "natural park",
+            "news",
+            "newspaper",
+            "newsstand",
+            "night club",
+            "notary",
+            "notary public",
+            "novelty",
+            "nursery",
+            "optical",
+            "outdoors",
+            "painting",
+            "park",
+            "parking",
+            "parking lot",
+            "pet",
+            "petshop",
+            "pharmacy",
+            "photo",
+            "photo service",
+            "photography",
+            "physical therapy",
+            "pitstop",
+            "pizza",
+            "police station",
+            "pool",
+            "port",
+            "post office",
+            "power company",
+            "preschool",
+            "professional cleaning",
+            "public utility",
+            "rail station",
+            "real estate agency",
+            "real estate agent",
+            "realtor",
+            "rehabilitation",
+            "repair",
+            "repairman",
+            "rest area",
+            "rest stop",
+            "restaurant",
+            "rv park",
+            "salon",
+            "school",
+            "scuba diving",
+            "seafood",
+            "services",
+            "sewage",
+            "shoes",
+            "shopping center",
+            "shopping mall",
+            "show venue",
+            "smoothie",
+            "spa",
+            "spirit",
+            "sporting good",
+            "sports field",
+            "sports store",
+            "storage",
+            "storage facility",
+            "storage lot",
+            "super",
+            "supermarket",
+            "swim club",
+            "swimming pool",
+            "tailor",
+            "tattoo",
+            "tattooing",
+            "theater",
+            "theme park",
+            "tour",
+            "tourism",
+            "tourist information",
+            "toy",
+            "toy shop",
+            "train station",
+            "travel agent",
+            "truck rental",
+            "university",
+            "utilities",
+            "utility",
+            "utility companies",
+            "vehicle maintenance",
+            "vehicle repair",
+            "vineyard",
+            "watches",
+            "water",
+            "wildlife sanctuary",
+            "wine",
+            "wine tasting",
+            "winery",
+            "woods",
+            "zoo"
+        ];
+
+    </script>
+</body>
+
+</html>
